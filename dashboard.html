@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ড্যাশবোর্ড</title><style>
+:root{
+  --bg:#f4f7fb; --panel:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe4ee;
+  --brand:#0f4c81; --brand2:#2563eb; --ok:#16a34a; --danger:#dc2626; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.topbar{background:linear-gradient(90deg,var(--brand),#123b63);color:#fff}
+.topbar-in{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand-title{font-size:1.15rem;font-weight:800}
+.brand-sub{font-size:.9rem;opacity:.9}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a,button,.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;text-decoration:none}
+.nav a{background:rgba(255,255,255,.12);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card-b{padding:20px}
+.h1{font-size:1.45rem;font-weight:800}
+.small{font-size:.92rem;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.row{grid-template-columns:1fr}}
+label{display:block;margin-bottom:6px;font-weight:700}
+input,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);outline:none}
+.btn-primary{background:var(--brand2);color:#fff}
+.btn-outline{background:#fff;border:1px solid var(--line);color:var(--text)}
+.btn-success{background:var(--ok);color:#fff}
+.btn-danger{background:var(--danger);color:#fff}
+.msg{margin-top:12px;font-weight:700}
+.ok{color:var(--ok)} .err{color:var(--danger)}
+.balance{background:#eef6ff;border:1px solid #cddfff;border-radius:16px;padding:18px;margin-top:14px}
+.balance .amt{font-size:2.1rem;font-weight:900;color:#1d4ed8}
+.table-wrap{overflow:auto}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:.93rem;vertical-align:top}
+.table th{color:var(--muted);font-weight:800}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.info-box{background:linear-gradient(180deg,#f8fbff,#fff);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.tile-top{padding:16px}
+.tile-title{font-weight:800;font-size:1.05rem}
+.tile-sub{color:var(--muted);font-size:.92rem;margin-top:4px}
+.tile-b{padding:0 16px 16px}
+.red-alert{background:#fff1f2;border:1px solid #fecdd3;color:#b91c1c;padding:14px 16px;border-radius:14px;font-weight:800}
+</style></head><body>
+<div class="topbar"><div class="topbar-in"><div><div class="brand-title">সিএমএস পোর্টাল</div><div class="brand-sub">লগইন • ব্যালেন্স • Withdraw Request</div></div><div class="nav"><a href="/index.html">হোম</a><a href="/dashboard.html">ড্যাশবোর্ড</a><a href="/admin.html">এডমিন</a><a href="/setup.html">সেটআপ</a></div></div></div>
+<div class="container"><div class="card"><div class="card-h"><div><div class="h1">ইউজার ড্যাশবোর্ড</div><div class="small">ব্যালেন্স, Withdraw Request এবং ব্যবহারযোগ্য সেবাসমূহ</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refreshBtn" class="btn btn-outline">রিফ্রেশ</button><button id="logoutBtn" class="btn btn-danger">লগআউট</button></div></div><div class="card-b"><div id="dashMsg" class="msg"></div><div id="userLine" class="small"></div><div class="balance"><div class="small">উপলব্ধ ব্যালেন্স</div><div id="balance" class="amt">0.00 টাকা</div></div><div class="card"><div class="card-h"><div style="font-weight:800">Withdraw Request</div></div><div class="card-b"><div class="row"><div><label>Amount</label><input id="wAmount" type="number" min="1"></div><div><label>Method</label><select id="wMethod"><option>bKash</option><option>Nagad</option></select></div><div><label>bKash / Nagad Number</label><input id="wNumber" placeholder="01XXXXXXXXX"></div><div><label>Note</label><input id="wNote" value="Withdraw request"></div></div><button id="wBtn" class="btn btn-primary" style="width:100%;margin-top:14px">Request Submit</button><div id="wMsg" class="msg"></div></div></div><div class="card"><div class="card-h"><div style="font-weight:800">পোর্টাল সেবা</div></div><div class="card-b"><div class="tiles"><div class="tile"><div class="tile-top"><div class="tile-title">NID কার্ড আবেদন</div><div class="tile-sub">আবেদন জমা / ফর্ম</div></div><div class="tile-b"><button class="btn btn-outline service-btn" style="width:100%">ওপেন করুন</button></div></div><div class="tile"><div class="tile-top"><div class="tile-title">সার্ভার কপি ডাউনলোড</div><div class="tile-sub">সার্ভার কপি সংগ্রহ</div></div><div class="tile-b"><button class="btn btn-outline service-btn" style="width:100%">ওপেন করুন</button></div></div><div class="tile"><div class="tile-top"><div class="tile-title">সাইন কপি ডাউনলোড</div><div class="tile-sub">সাইন কপি সংগ্রহ</div></div><div class="tile-b"><button class="btn btn-outline service-btn" style="width:100%">ওপেন করুন</button></div></div><div class="tile"><div class="tile-top"><div class="tile-title">NID সংশোধন অনুমোদন</div><div class="tile-sub">সংশোধন অনুমোদন</div></div><div class="tile-b"><button class="btn btn-outline service-btn" style="width:100%">ওপেন করুন</button></div></div></div><div id="serviceBlockMsg" class="red-alert hidden" style="margin-top:14px">দুঃখীত, আপনার পোর্টাল এক্সেস স্থগিত রয়েছে। বোনাস উত্তল করে তারপর পুনরায় ব্যবহার করুন।</div></div></div><div class="card"><div class="card-h"><div style="font-weight:800">আপনার Withdraw Requests</div></div><div class="card-b table-wrap"><table class="table"><thead><tr><th>তারিখ</th><th>Method</th><th>Number</th><th>Amount</th><th>Status</th><th>Admin Note</th></tr></thead><tbody id="wrBody"></tbody></table></div></div><div class="card"><div class="card-h"><div style="font-weight:800">লেনদেন</div></div><div class="card-b table-wrap"><table class="table"><thead><tr><th>তারিখ</th><th>নোট</th><th>পরিমাণ</th></tr></thead><tbody id="txBody"></tbody></table></div></div></div></div></div><script>const $=id=>document.getElementById(id); async function load(){ const res=await fetch('/api/dashboard-data'); const j=await res.json(); if(!j.ok){ $('dashMsg').className='msg err'; $('dashMsg').textContent=(j.error||'লগইন প্রয়োজন'); return; } $('dashMsg').textContent=''; $('userLine').textContent=j.user.user_id+' • '+j.user.name+' ('+j.user.role+')'; $('balance').textContent=Number(j.balance||0).toFixed(2)+' টাকা'; $('txBody').innerHTML=(j.transactions||[]).map(t=>`<tr><td>${new Date(t.created_at).toLocaleString()}</td><td>${t.note||''}</td><td><strong>${Number(t.amount).toFixed(2)}</strong></td></tr>`).join('') || '<tr><td colspan="3">কোনো লেনদেন নেই</td></tr>'; $('wrBody').innerHTML=(j.withdraw_requests||[]).map(r=>`<tr><td>${new Date(r.created_at).toLocaleString()}</td><td>${r.method}</td><td>${r.payout_number}</td><td><strong>${Number(r.amount).toFixed(2)}</strong></td><td><strong>${r.status}</strong></td><td>${r.admin_note||''}</td></tr>`).join('') || '<tr><td colspan="6">কোনো withdraw নেই</td></tr>'; } $('refreshBtn').onclick=load; $('logoutBtn').onclick=async()=>{ await fetch('/api/auth-logout',{method:'POST'}); location.href='/index.html'; }; $('wBtn').onclick=async()=>{ const res=await fetch('/api/withdraw-request',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({amount:Number($('wAmount').value),method:$('wMethod').value,payout_number:$('wNumber').value,note:$('wNote').value})}); const j=await res.json(); $('wMsg').className='msg '+(j.ok?'ok':'err'); $('wMsg').textContent=j.ok?j.message:(j.error||'Failed'); if(j.ok) load(); }; document.addEventListener('click', e=>{ if(e.target.classList.contains('service-btn')){ $('serviceBlockMsg').classList.remove('hidden'); window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); } }); load();</script></body></html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>লগইন / রেজিস্টার</title><style>
+:root{
+  --bg:#f4f7fb; --panel:#fff; --text:#0f172a; --muted:#64748b; --line:#dbe4ee;
+  --brand:#0f4c81; --brand2:#2563eb; --ok:#16a34a; --danger:#dc2626; --shadow:0 10px 30px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.topbar{background:linear-gradient(90deg,var(--brand),#123b63);color:#fff}
+.topbar-in{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand-title{font-size:1.15rem;font-weight:800}
+.brand-sub{font-size:.9rem;opacity:.9}
+.nav{display:flex;gap:8px;flex-wrap:wrap}
+.nav a,button,.btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;text-decoration:none}
+.nav a{background:rgba(255,255,255,.12);color:#fff}
+.container{max-width:1100px;margin:0 auto;padding:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px}
+.card-h{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card-b{padding:20px}
+.h1{font-size:1.45rem;font-weight:800}
+.small{font-size:.92rem;color:var(--muted)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.row{grid-template-columns:1fr}}
+label{display:block;margin-bottom:6px;font-weight:700}
+input,select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);outline:none}
+.btn-primary{background:var(--brand2);color:#fff}
+.btn-outline{background:#fff;border:1px solid var(--line);color:var(--text)}
+.btn-success{background:var(--ok);color:#fff}
+.btn-danger{background:var(--danger);color:#fff}
+.msg{margin-top:12px;font-weight:700}
+.ok{color:var(--ok)} .err{color:var(--danger)}
+.balance{background:#eef6ff;border:1px solid #cddfff;border-radius:16px;padding:18px;margin-top:14px}
+.balance .amt{font-size:2.1rem;font-weight:900;color:#1d4ed8}
+.table-wrap{overflow:auto}
+.table{width:100%;border-collapse:collapse}
+.table th,.table td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:.93rem;vertical-align:top}
+.table th{color:var(--muted);font-weight:800}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.info-box{background:linear-gradient(180deg,#f8fbff,#fff);border:1px solid var(--line);border-radius:16px;padding:18px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.hidden{display:none!important}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.tile-top{padding:16px}
+.tile-title{font-weight:800;font-size:1.05rem}
+.tile-sub{color:var(--muted);font-size:.92rem;margin-top:4px}
+.tile-b{padding:0 16px 16px}
+.red-alert{background:#fff1f2;border:1px solid #fecdd3;color:#b91c1c;padding:14px 16px;border-radius:14px;font-weight:800}
+</style></head><body>
+<div class="topbar"><div class="topbar-in"><div><div class="brand-title">সিএমএস পোর্টাল</div><div class="brand-sub">লগইন • ব্যালেন্স • Withdraw Request</div></div><div class="nav"><a href="/index.html">হোম</a><a href="/dashboard.html">ড্যাশবোর্ড</a><a href="/admin.html">এডমিন</a><a href="/setup.html">সেটআপ</a></div></div></div>
+<div class="container"><div class="hero"><div class="info-box"><div class="h1">ইউজার লগইন পোর্টাল</div><div class="small" style="margin-top:8px">সাধারণ ব্যবহারকারীরা শুধু লগইন করে ব্যালেন্স দেখতে এবং Withdraw Request দিতে পারবে।</div></div><div class="card" style="margin-top:0"><div class="card-h"><div><div class="h1">লগইন / রেজিস্টার</div><div class="small">প্রথমে রেজিস্টার, পরে লগইন</div></div><div class="tabs"><button id="tabLogin" class="btn btn-primary">লগইন</button><button id="tabReg" class="btn btn-outline">রেজিস্টার</button></div></div><div class="card-b"><div id="loginBox"><div class="row"><div><label>User ID</label><input id="lUser" placeholder="user123"></div><div><label>পাসওয়ার্ড</label><input id="lPass" type="password" placeholder="••••••"></div></div><button id="loginBtn" class="btn btn-primary" style="width:100%;margin-top:14px">লগইন</button></div><div id="regBox" class="hidden"><div class="row"><div><label>নাম</label><input id="rName"></div><div><label>মোবাইল</label><input id="rMobile" placeholder="01XXXXXXXXX"></div><div><label>User ID</label><input id="rUser"></div><div><label>পাসওয়ার্ড</label><input id="rPass" type="password"></div><div><label>কনফার্ম পাসওয়ার্ড</label><input id="rPass2" type="password"></div></div><button id="regBtn" class="btn btn-primary" style="width:100%;margin-top:14px">অ্যাকাউন্ট তৈরি করুন</button></div><div id="msg" class="msg"></div></div></div></div></div><script>const $=id=>document.getElementById(id); $('tabLogin').onclick=()=>{ $('loginBox').classList.remove('hidden'); $('regBox').classList.add('hidden'); $('tabLogin').className='btn btn-primary'; $('tabReg').className='btn btn-outline'; }; $('tabReg').onclick=()=>{ $('regBox').classList.remove('hidden'); $('loginBox').classList.add('hidden'); $('tabReg').className='btn btn-primary'; $('tabLogin').className='btn btn-outline'; }; $('loginBtn').onclick=async()=>{ const res=await fetch('/api/auth-login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({user_id:$('lUser').value,password:$('lPass').value})}); const j=await res.json(); $('msg').className='msg '+(j.ok?'ok':'err'); $('msg').textContent=j.ok?'লগইন সফল। এখন ড্যাশবোর্ডে যান।':(j.error||'Failed'); }; $('regBtn').onclick=async()=>{ if($('rPass').value!==$('rPass2').value){ $('msg').className='msg err'; $('msg').textContent='পাসওয়ার্ড ম্যাচ হয়নি'; return; } const res=await fetch('/api/auth-register',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:$('rName').value,mobile:$('rMobile').value,user_id:$('rUser').value,password:$('rPass').value})}); const j=await res.json(); $('msg').className='msg '+(j.ok?'ok':'err'); $('msg').textContent=j.ok?'রেজিস্টার সফল। এখন ড্যাশবোর্ডে যান।':(j.error||'Failed'); };</script></body></html>
